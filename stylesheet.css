@@ -1,0 +1,13 @@
+table {}
+td{
+  min-width: 100px;
+  border: 1px solid;
+}
+td:after{
+    content: ".";
+    visibility: hidden;
+}
+#dataInput{
+  min-width: 400px;
+  min-height: 50px;
+}

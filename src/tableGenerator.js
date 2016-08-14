@@ -97,11 +97,3 @@ function generateTable(a, b){
   
   return $table
 }
-
-/* TESTS
-var $body = $("body")
-
-$body.append( generateTable(2,3) )
-$body.append( generateTable([[1,2],[2,1,3,4,5],[1]]) )
-$body.append( generateTable("1 2.1; 23.5 4 5 1; 2") )
-*/

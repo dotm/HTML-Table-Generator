@@ -35,11 +35,86 @@ describe("tableGenerator", function() {
   })
     
   describe("generateTable", function() {
-    let $container = $("<div>").addClass("container");
+    let $table;
+    let expectedHTML;
+    let defaultHTML1 = '<tr><td row="0" col="0"></td><td row="0" col="1"></td><td row="0" col="2"></td></tr><tr><td row="1" col="0"></td><td row="1" col="1"></td><td row="1" col="2"></td></tr>';
+    let defaultHTML2 = '<tr><td row="0" col="0">1</td><td row="0" col="1">2.1</td><td row="0" col="2"></td><td row="0" col="3"></td></tr><tr><td row="1" col="0">23.5</td><td row="1" col="1">4</td><td row="1" col="2">5</td><td row="1" col="3">1</td></tr><tr><td row="2" col="0">2</td><td row="2" col="1"></td><td row="2" col="2"></td><td row="2" col="3"></td></tr>';
+    
+    beforeEach(function() {
+      $table = null;
+      expectedHTML = ""
+    })
     
     it("should create table", function() {
-      let $table = generateTable(1,1)
-      expect($table.is("table")).toBeTruthy();
+      $table = generateTable(1,1);
+      expectedHTML = '<tr><td row="0" col="0"></td></tr>';
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: (int totalRow, int totalColumn)", function() {
+      $table = generateTable(2,3);
+      expectedHTML = defaultHTML1
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: (string[] tableValue, undefined)", function() {
+      $table = generateTable([["1","2.1"],["23.5","4","5","1"],["2"]]);
+      expectedHTML = defaultHTML2;
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: (float[] tableValue, undefined)", function() {
+      $table = generateTable([[1,2.1],[23.5,4,5,1],[2]]);
+      expectedHTML = defaultHTML2;
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: int totalRow, int totalColumn enclosed in string", function() {
+      $table = generateTable("2,3");
+      expectedHTML = defaultHTML1
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+
+    it("should accept as arguments: string[] tableValue enclosed in string", function() {
+      $table = generateTable('[["1","2.1"],["23.5","4","5","1"],["2"]]');
+      expectedHTML = defaultHTML2;
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: float[] tableValue enclosed in string", function() {
+      $table = generateTable('[[1,2.1],[23.5,4,5,1],[2]]');
+      expectedHTML = defaultHTML2;
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: (string tableValue, undefined) with semicolon as row separator", function() {
+      $table = generateTable("1 2.1; 23.5 4 5 1; 2");
+      expectedHTML = defaultHTML2;
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
+    });
+    
+    it("should accept as arguments: (string tableValue, undefined) with newline character as row separator", function() {
+      $table = generateTable("1 2.1\r\n23.5 4 5 1\r\n2");
+      expectedHTML = defaultHTML2;
+      
+      expect( $table.is("table") ).toBeTruthy();
+      expect( $table.html() ).toEqual(expectedHTML);
     });
   })
   

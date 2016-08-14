@@ -6,7 +6,7 @@ function arrayCounter(array){
 }
 
 function formatString(str){
-  return str.trim().replace(/[ |\t]+/g," ").replace(/\r/g,"")
+  return str.trim().replace(/[\r\n]/g," ").replace(/[ \t]+/g," ")
 }
 
 // string_To_StringArray( "1 2.1; 23.5 4 5 1; 2" )

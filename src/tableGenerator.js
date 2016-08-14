@@ -12,7 +12,7 @@ function formatString(str){
 // string_To_StringArray( "1 2.1; 23.5 4 5 1; 2" )
 // -> [["1","2.1"],["23.5","4","5","1"],["2"]]
 function string_To_StringArray(str, separator = ";"){
-  let str = formatString(str)
+  str = formatString(str)
   let strArr = str.split(separator)
   strArr.forEach(
     function(els, idx, arr){

@@ -1,7 +1,25 @@
+describe("formatString", function(){
+  it("replace multiple spaces with single space", function() {
+    expect( formatString("1  2") ).toEqual("1 2");
+  })
+  
+  xit("remove newline characters", function() {
+    
+  })
+})
+
 describe("string_To_StringArray", function(){
   it("should convert string to array of string", function() {
-    let result = string_To_StringArray( "1 2.1; 23.5 4 5 1; 2" );
+    let result;
     let expectedResult = [["1","2.1"],["23.5","4","5","1"],["2"]];
+    
+    result = string_To_StringArray( "1 2.1; 23.5 4 5 1; 2" );
+    expect(result).toEqual(expectedResult);
+    
+    result = string_To_StringArray( "1    2.1; 23.5  4\t5 1; 2" );
+    expect(result).toEqual(expectedResult);
+    
+    result = string_To_StringArray( "1\r2.1; 23.5\r\n4\n5 1; 2" );
     expect(result).toEqual(expectedResult);
   })
 })

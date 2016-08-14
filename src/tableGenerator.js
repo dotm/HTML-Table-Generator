@@ -25,10 +25,9 @@ function string_To_StringArray(str, separator){
 
 // stringArray_To_FloatArray ( [["1","2.1"],["23.5","4","5","1"],["2"]] )
 // -> [[1,2.1],[23.5,4,5,1],[2]]
-function stringArray_To_FloatArray(strArr){
-  var array = strArr
-  for (var i in array){
-    for (var j in array[i]){
+function stringArray_To_FloatArray(array){
+  for (var i = 0; i < array.length; i++){
+    for (var j = 0; j < array[i].length; j++){
       array[i][j] = parseFloat(array[i][j])
     }
   }

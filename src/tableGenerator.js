@@ -5,15 +5,14 @@ function arrayCounter(array){
   return arrayData
 }
 
-function formatString(str){
-  return str.trim().replace(/[\r\n]/g," ").replace(/[ \t]+/g," ")
-}
-
 // string_To_StringArray( "1 2.1; 23.5 4 5 1; 2" )
 // -> [["1","2.1"],["23.5","4","5","1"],["2"]]
 function string_To_StringArray(str, separator = ";"){
-  str = formatString(str)
-  let strArr = str.split(separator)
+  let SEPARATOR = "__SEPARATOR__"
+  let re = new RegExp(separator, 'g');
+  str = str.replace(re, SEPARATOR)
+  str = str.trim().replace(/[\r\n]/g," ").replace(/[ \t]+/g," ")
+  let strArr = str.split(SEPARATOR)
   strArr.forEach(
     function(els, idx, arr){
       arr[idx] = els.trim().split(" ")

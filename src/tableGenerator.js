@@ -1,10 +1,3 @@
-function arrayCounter(array){
-  var arrayData = {}
-  arrayData.rows = array.length
-  arrayData.cols = array.slice().sort()[array.length-1].length
-  return arrayData
-}
-
 // string_To_StringArray( "1 2.1; 23.5 4 5 1; 2" )
 // -> [["1","2.1"],["23.5","4","5","1"],["2"]]
 function string_To_StringArray(str, separator = ";"){
@@ -49,13 +42,13 @@ function generateTable(a, b){
         $lastRow.append(cell)
       }
     }
-
+  }
+  
   // generateTable(array) function signature
-  }else if(a instanceof Array && typeof b === "undefined"){
+  else if(a instanceof Array && typeof b === "undefined"){
     var array = a
-    var arrayObj = arrayCounter(a)
-    var rows = arrayObj.rows
-    var cols = arrayObj.cols
+    var rows = array.length
+    var cols = array.slice().sort()[array.length-1].length
 
     for (var i=0; i<rows; i++){
       //$table.append("<tr row="+i+">")
@@ -69,8 +62,9 @@ function generateTable(a, b){
         $lastRow.append(cell)
       }
     }
+  }
   
-  }else if(typeof a === "string" && typeof b === "undefined"){
+  else if(typeof a === "string" && typeof b === "undefined"){
     // generateTable(array) function signature in string
     if( /^\s*\[.*\]\s*$/.test(a) ){
       return generateTable(JSON.parse(a))
